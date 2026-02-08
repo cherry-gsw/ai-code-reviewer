@@ -6,6 +6,18 @@ Automated code review platform that uses AI to analyze code quality, detect secu
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 [![React 18](https://img.shields.io/badge/react-18.0+-61dafb.svg)](https://reactjs.org/)
 
+## Quick Start
+
+**Run with one command:**
+```bash
+./run.sh          # Mac/Linux
+run.bat           # Windows
+```
+
+Then open:
+- Frontend: http://localhost:3000
+- API docs: http://localhost:8000/docs
+
 ## What it does
 
 - Analyzes code for quality issues and potential bugs
