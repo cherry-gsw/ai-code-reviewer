@@ -12,9 +12,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gradient-to-br from-[#F5F1E8] via-[#E8E1D3] to-[#F5F1E8]">
           <Navbar />
-          <main className="container mx-auto px-4 py-8">
+          <main className="container mx-auto px-4 py-12">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/new" element={<ReviewForm />} />
