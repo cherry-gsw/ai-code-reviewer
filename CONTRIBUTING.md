@@ -1,21 +1,19 @@
-# Contributing to AI Code Review Dashboard
+# Contributing
 
-Thank you for your interest in contributing! 🎉
+Thanks for checking this out! Here's how to get started:
 
-## Getting Started
+## Setup
 
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/yourusername/code-review-ai.git`
-3. Create a branch: `git checkout -b feature/your-feature-name`
-4. Make your changes
-5. Run tests: `pytest` (backend) and `npm test` (frontend)
-6. Commit: `git commit -m "Add your feature"`
-7. Push: `git push origin feature/your-feature-name`
-8. Open a Pull Request
+1. Fork and clone the repo
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Make your changes
+4. Run tests: `pytest` (backend) and `npm test` (frontend)
+5. Commit and push
+6. Open a PR
 
-## Development Setup
+## Development
 
-### Backend
+**Backend:**
 ```bash
 cd backend
 python -m venv venv
@@ -24,27 +22,16 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Frontend
+**Frontend:**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-## Code Style
+## Guidelines
 
-- Python: Follow PEP 8
-- TypeScript/React: Use ESLint configuration
-- Write meaningful commit messages
+- Follow existing code style
 - Add tests for new features
-
-## Pull Request Guidelines
-
-- Keep PRs focused on a single feature/fix
-- Update documentation as needed
-- Ensure all tests pass
-- Add screenshots for UI changes
-
-## Questions?
-
-Open an issue or reach out to the maintainers!
+- Keep commits focused
+- Update docs if needed
