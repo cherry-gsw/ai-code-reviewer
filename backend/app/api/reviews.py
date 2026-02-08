@@ -36,7 +36,6 @@ class CodeReviewResponse(BaseModel):
     issues: List[IssueResponse] = []
 
 async def process_review(review_id: int, code: str, language: str, db: AsyncSession):
-    """Background task to analyze code"""
     analysis = await analyze_code(code, language)
     
     result = await db.execute(select(CodeReview).where(CodeReview.id == review_id))
@@ -67,7 +66,7 @@ async def create_review(
     db: AsyncSession = Depends(get_db)
 ):
     review = CodeReview(
-        user_id=1,  # TODO: Get from auth
+        user_id=1,
         title=review_data.title,
         language=review_data.language,
         code=review_data.code,
@@ -84,14 +83,11 @@ async def create_review(
 @router.get("/", response_model=List[CodeReviewResponse])
 async def get_reviews(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(CodeReview).offset(skip).limit(limit))
-    reviews = result.scalars().all()
-    return reviews
+    return result.scalars().all()
 
 @router.get("/{review_id}", response_model=CodeReviewResponse)
 async def get_review(review_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(
-        select(CodeReview).where(CodeReview.id == review_id)
-    )
+    result = await db.execute(select(CodeReview).where(CodeReview.id == review_id))
     review = result.scalar_one_or_none()
     
     if not review:
@@ -110,4 +106,4 @@ async def delete_review(review_id: int, db: AsyncSession = Depends(get_db)):
     await db.delete(review)
     await db.commit()
     
-    return {"message": "Review deleted successfully"}
+    return {"message": "Review deleted"}

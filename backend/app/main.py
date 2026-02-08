@@ -7,20 +7,16 @@ from app.api import reviews, analytics, auth
 from app.core.config import settings
 from app.core.database import engine, Base
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting up...")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     yield
-    logger.info("Shutting down...")
 
 app = FastAPI(
     title="AI Code Review API",
-    description="Real-time AI-powered code review platform",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -56,11 +52,7 @@ manager = ConnectionManager()
 
 @app.get("/")
 async def root():
-    return {
-        "message": "AI Code Review API",
-        "version": "1.0.0",
-        "docs": "/docs"
-    }
+    return {"message": "AI Code Review API", "version": "1.0.0"}
 
 @app.get("/health")
 async def health_check():
@@ -72,9 +64,6 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
     try:
         while True:
             data = await websocket.receive_json()
-            await manager.broadcast({
-                "client_id": client_id,
-                "data": data
-            })
+            await manager.broadcast({"client_id": client_id, "data": data})
     except WebSocketDisconnect:
         manager.disconnect(websocket)
