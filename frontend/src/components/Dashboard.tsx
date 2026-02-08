@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom'
 import { FileCode, Clock, CheckCircle, AlertCircle, Sparkles, ArrowRight } from 'lucide-react'
 import { getReviews } from '../services/api'
 
+interface Review {
+  id: number;
+  title: string;
+  language: string;
+  status: string;
+  score: number | null;
+  created_at: string;
+}
+
 export default function Dashboard() {
   const { data: reviews, isLoading } = useQuery({
     queryKey: ['reviews'],
@@ -28,7 +37,7 @@ export default function Dashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {reviews?.map((review: any) => (
+        {reviews?.map((review: Review) => (
           <Link
             key={review.id}
             to={`/review/${review.id}`}
